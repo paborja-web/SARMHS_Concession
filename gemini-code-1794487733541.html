@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SARMHS CONFESSION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top center, #062b1c 0%, #05130e 42%, #090b0a 100%);
+            min-height: 100vh;
+            color: #f4f4f5;
+            padding: 28px 16px 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 28px;
+            max-width: 620px;
+            width: 100%;
+        }
+
+        .school-badge {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(145deg, #131c18, #080d0b);
+            border: 3px solid #10b981;
+            border-radius: 50%;
+            margin: 0 auto 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.4), inset 0 0 12px rgba(5, 150, 105, 0.3);
+            font-size: 36px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .school-badge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 35px rgba(52, 211, 153, 0.65);
+        }
+
+        .school-name {
+            font-size: 12px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #6ee7b7;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin: 6px 0;
+            background: linear-gradient(to right, #ffffff, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+            letter-spacing: 1.5px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #9ca3af;
+            line-height: 1.5;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 620px;
+            width: 100%;
+        }
+
+        .card {
+            background: #111614;
+            border-radius: 18px;
+            padding: 26px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(16, 185, 129, 0.22);
+            margin-bottom: 32px;
+            border-top: 4px solid #059669;
+            position: relative;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1.5px solid #222c28;
+            border-radius: 12px;
+            font-size: 14px;
+            background: #090d0b;
+            color: #f4f4f5;
+            outline: none;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        input[type="text"]::placeholder,
+        textarea::placeholder {
+            color: #6b7280;
+        }
+
+        select option {
+            background: #111614;
+            color: #f4f4f5;
+        }
+
+        input[type="text"]:focus, select:focus, textarea:focus {
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+            background: #0c120f;
+        }
+
+        .message-group {
+            margin-bottom: 18px;
+        }
+
+        .message-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #6ee7b7;
+            margin-bottom: 8px;
+            letter-spacing: 0.3px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 135px;
+            padding: 14px 15px;
+            border: 1.5px solid #222c28;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.6;
+            resize: vertical;
+            background: #090d0b;
+            color: #f4f4f5;
+            outline: none;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        .char-count.near-limit {
+            color: #34d399;
+        }
+
+        .send-btn {
+            width: 100%;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #059669 0%, #065f46 100%);
+            color: #ffffff;
+            border: 1px solid rgba(52, 211, 153, 0.35);
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.6px;
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.38);
+            transition: transform 0.18s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .send-btn:hover {
+            background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.52);
+            transform: translateY(-2px);
+        }
+
+        .send-btn:active {
+            transform: translateY(0);
+        }
+
+        .wall-header {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .wall-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .wall-title {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.4px;
+        }
+
+        .live-pulse {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 10px #10b981;
+            animation: pulseGlow 1.8s infinite ease-in-out;
+            flex-shrink: 0;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 10px #10b981; }
+            50% { transform: scale(1.25); opacity: 0.7; box-shadow: 0 0 18px #34d399; }
+        }
+
+        .post-count-badge {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6ee7b7;
+            background: rgba(5, 150, 105, 0.18);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            padding: 4px 12px;
+            border-radius: 9999px;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+
+        .filter-bar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-pill {
+            background: #111614;
+            color: #9ca3af;
+            border: 1px solid #222c28;
+            border-radius: 9999px;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .filter-pill:hover {
+            border-color: rgba(16, 185, 129, 0.5);
+            color: #f4f4f5;
+        }
+
+        .filter-pill.active {
+            background: linear-gradient(135deg, #059669 0%, #065f46 100%);
+            color: #ffffff;
+            border-color: rgba(52, 211, 153, 0.45);
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35);
+        }
+
+        .confession-item {
+            background: linear-gradient(180deg, #131916 0%, #0f1412 100%);
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 18px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.65), 0 0 0 1px #222c28;
+            border-left: 4px solid #10b981;
+            animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .confession-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.78), 0 0 0 1px rgba(16, 185, 129, 0.38);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .confession-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .sender-info {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .avatar-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #063724 0%, #131c18 100%);
+            border: 1.5px solid rgba(16, 185, 129, 0.55);
+            color: #6ee7b7;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+            flex-shrink: 0;
+            letter-spacing: 0.5px;
+        }
+
+        .sender-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .sender-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #f4f4f5;
+        }
+
+        .confession-time {
+            font-size: 11px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .tag {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            background: rgba(5, 150, 105, 0.16);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            letter-spacing: 0.2px;
+        }
+
+        .confession-text {
+            font-size: 14.5px;
+            line-height: 1.7;
+            color: #e4e4e7;
+            white-space: pre-wrap;
+            word-break: break-word;
+            padding: 4px 0 14px;
+        }
+
+        .action-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-top: 12px;
+            border-top: 1px solid #1d2622;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #171f1c;
+            color: #9ca3af;
+            border: 1px solid #24302b;
+            border-radius: 9999px;
+            padding: 6px 13px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+            background: #1e2925;
+            color: #f4f4f5;
+            border-color: rgba(16, 185, 129, 0.45);
+        }
+
+        .action-btn.liked {
+            background: rgba(5, 150, 105, 0.2);
+            color: #34d399;
+            border-color: rgba(16, 185, 129, 0.55);
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.22);
+        }
+
+        .action-btn.active-comments {
+            color: #6ee7b7;
+            border-color: rgba(16, 185, 129, 0.42);
+        }
+
+        .comments-section {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px dashed #222c28;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .comments-section.collapsed {
+            display: none;
+        }
+
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .comment-bubble {
+            background: #0a0f0d;
+            border: 1px solid #1d2622;
+            border-left: 2.5px solid #059669;
+            border-radius: 12px;
+            padding: 10px 13px;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .comment-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .comment-author {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6ee7b7;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .comment-author-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #10b981;
+        }
+
+        .comment-time {
+            font-size: 10.5px;
+            color: #6b7280;
+        }
+
+        .comment-body {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #d1d5db;
+            word-break: break-word;
+            white-space: pre-wrap;
+        }
+
+        .no-comments-hint {
+            font-size: 12px;
+            color: #6b7280;
+            font-style: italic;
+            padding: 2px 4px;
+        }
+
+        .comment-form {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            background: #090d0b;
+            border: 1px solid #222c28;
+            border-radius: 12px;
+            padding: 6px 8px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .comment-form:focus-within {
+            border-color: #10b981;
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.16);
+        }
+
+        .comment-name-input {
+            width: 115px !important;
+            padding: 7px 10px !important;
+            font-size: 12px !important;
+            border-radius: 8px !important;
+            background: #121815 !important;
+            border: 1px solid #222c28 !important;
+            flex-shrink: 0;
+        }
+
+        .comment-text-input {
+            flex: 1;
+            padding: 7px 10px !important;
+            font-size: 12.5px !important;
+            border-radius: 8px !important;
+            background: transparent !important;
+            border: none !important;
+            min-width: 0;
+        }
+
+        .comment-text-input:focus {
+            box-shadow: none !important;
+        }
+
+        .comment-submit-btn {
+            background: linear-gradient(135deg, #059669 0%, #065f46 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 9px;
+            padding: 7px 13px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            flex-shrink: 0;
+            transition: transform 0.15s ease, background 0.2s ease;
+        }
+
+        .comment-submit-btn:hover {
+            background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+            transform: translateY(-1px);
+        }
+
+        .empty-feed-card {
+            background: #111614;
+            border: 1px dashed #26332e;
+            border-radius: 16px;
+            padding: 32px 20px;
+            text-align: center;
+            color: #6b7280;
+            font-size: 13.5px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #111614;
+            color: #ffffff;
+            border: 1px solid #10b981;
+            border-left: 4px solid #10b981;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(16, 185, 129, 0.3);
+            opacity: 0;
+            transform: translateY(15px);
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 50;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 480px) {
+            .form-row {
+                flex-direction: column;
+            }
+            h1 {
+                font-size: 25px;
+            }
+            .card {
+                padding: 20px;
+            }
+            .comment-form {
+                flex-wrap: wrap;
+            }
+            .comment-name-input {
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="school-badge" title="SARMHS Official">🏫</div>
+        <div class="school-name">SARMHS Student Portal</div>
+        <h1>SARMHS CONFESSION</h1>
+        <p class="subtitle">Share your thoughts, shoutouts, or stories safely and anonymously.</p>
+    </header>
+
+    <main class="container">
+        <div class="card">
+            <form id="confessionForm">
+                <div class="form-row">
+                    <input type="text" id="codename" placeholder="Codename (Optional - default: Anonymous)" maxlength="30">
+                    <select id="category" required>
+                        <option value="Crush / Admiration">💚 Crush / Admiration</option>
+                        <option value="Shoutout">📢 Shoutout</option>
+                        <option value="Rant / Vent">😤 Rant / Vent</option>
+                        <option value="Advice Needed">💡 Advice Needed</option>
+                        <option value="Funny / Random">😂 Funny / Random</option>
+                    </select>
+                </div>
+
+                <div class="message-group">
+                    <label for="message">Your Confession</label>
+                    <textarea id="message" placeholder="Write what's on your mind... Be respectful and keep it safe!" maxlength="600" required></textarea>
+                    <div class="char-count" id="charCount">0 / 600</div>
+                </div>
+
+                <button type="submit" id="submitBtn" class="send-btn">Post Confession Anonymously</button>
+            </form>
+        </div>
+
+        <section class="wall-section">
+            <div class="wall-header">
+                <div class="wall-title-row">
+                    <div class="wall-title">
+                        <span class="live-pulse"></span>
+                        Freedom Wall
+                    </div>
+                    <span class="post-count-badge" id="postCount">0 Posts</span>
+                </div>
+
+                <div class="filter-bar" id="filterBar">
+                    <button type="button" class="filter-pill active" data-filter="All">All</button>
+                    <button type="button" class="filter-pill" data-filter="Crush / Admiration">💚 Crush</button>
+                    <button type="button" class="filter-pill" data-filter="Shoutout">📢 Shoutout</button>
+                    <button type="button" class="filter-pill" data-filter="Rant / Vent">😤 Rant</button>
+                    <button type="button" class="filter-pill" data-filter="Advice Needed">💡 Advice</button>
+                    <button type="button" class="filter-pill" data-filter="Funny / Random">😂 Funny</button>
+                </div>
+            </div>
+
+            <div id="confessionsList"></div>
+        </section>
+    </main>
+
+    <div class="toast" id="toast">Confession posted!</div>
+
+    <script>
+        const STORAGE_KEY = 'sarmhs_confessions_green_v2';
+        let currentFilter = 'All';
+
+        const defaultConfessions = [
+            {
+                id: 1,
+                codename: 'Green_Scarf_10',
+                category: 'Crush / Admiration',
+                message: 'Sa nagbabasa nito na laging nasa library tuwing lunch break, ang ganda ng ngiti mo kanina sa hallway. Good luck sa exams natin!',
+                timestamp: 'Just now',
+                likes: 14,
+                liked: false,
+                openComments: true,
+                comments: [
+                    { author: 'Library_Watcher', text: 'Sana all may inspirasyon sa review!', time: '2m ago' }
+                ]
+            },
+            {
+                id: 2,
+                codename: 'Anonymous',
+                category: 'Shoutout',
+                message: 'Shoutout sa mga officers at student volunteers na nag-ayos ng school event kanina. Solid ng energy niyo kahit mainit!',
+                timestamp: '18 mins ago',
+                likes: 27,
+                liked: false,
+                openComments: false,
+                comments: []
+            }
+        ];
+
+        // Safe storage helper (prevents crashes in sandboxed iframes)
+        function loadConfessions() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                return raw ? JSON.parse(raw) : [...defaultConfessions];
+            } catch (err) {
+                return [...defaultConfessions];
+            }
+        }
+
+        function saveConfessions() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(confessions));
+            } catch (err) {
+                // Ignore if localStorage is blocked in preview environment
+            }
+        }
+
+        let confessions = loadConfessions();
+
+        const form = document.getElementById('confessionForm');
+        const codenameInput = document.getElementById('codename');
+        const categoryInput = document.getElementById('category');
+        const messageInput = document.getElementById('message');
+        const charCount = document.getElementById('charCount');
+        const confessionsList = document.getElementById('confessionsList');
+        const postCount = document.getElementById('postCount');
+        const filterBar = document.getElementById('filterBar');
+        const toast = document.getElementById('toast');
+
+        function showToast(text) {
+            toast.textContent = text;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2800);
+        }
+
+        function escapeHTML(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        messageInput.addEventListener('input', () => {
+            const len = messageInput.value.length;
+            charCount.textContent = `${len} / 600`;
+            charCount.classList.toggle('near-limit', len >= 520);
+        });
+
+        filterBar.addEventListener('click', (e) => {
+            const pill = e.target.closest('.filter-pill');
+            if (!pill) return;
+            document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            currentFilter = pill.dataset.filter;
+            renderConfessions();
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const rawMessage = messageInput.value.trim();
+            if (!rawMessage) {
+                messageInput.focus();
+                return;
+            }
+
+            const rawCodename = codenameInput.value.trim() || 'Anonymous';
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            const newPost = {
+                id: Date.now(),
+                codename: rawCodename,
+                category: categoryInput.value,
+                message: rawMessage,
+                timestamp: `Today, ${timeStr}`,
+                likes: 0,
+                liked: false,
+                openComments: false,
+                comments: []
+            };
+
+            confessions.unshift(newPost);
+            saveConfessions();
+
+            // Reset filter to "All" so the newly posted confession is immediately visible
+            currentFilter = 'All';
+            document.querySelectorAll('.filter-pill').forEach(p => {
+                p.classList.toggle('active', p.dataset.filter === 'All');
+            });
+
+            form.reset();
+            charCount.textContent = '0 / 600';
+            charCount.classList.remove('near-limit');
+            renderConfessions();
+            showToast('💚 Confession posted anonymously!');
+        });
+
+        window.toggleLike = function(id) {
+            const item = confessions.find(c => c.id === id);
+            if (!item) return;
+            item.liked = !item.liked;
+            item.likes += item.liked ? 1 : -1;
+            saveConfessions();
+            renderConfessions();
+        };
+
+        window.toggleComments = function(id) {
+            const item = confessions.find(c => c.id === id);
+            if (!item) return;
+            item.openComments = !item.openComments;
+            saveConfessions();
+            renderConfessions();
+        };
+
+        window.addComment = function(e, id) {
+            e.preventDefault();
+            const formEl = e.target;
+            const nameVal = formEl.querySelector('.comment-name-input').value.trim() || 'Anonymous';
+            const textVal = formEl.querySelector('.comment-text-input').value.trim();
+            if (!textVal) return;
+
+            const item = confessions.find(c => c.id === id);
+            if (!item) return;
+
+            const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            item.comments.push({
+                author: nameVal,
+                text: textVal,
+                time: timeStr
+            });
+            item.openComments = true;
+            saveConfessions();
+            renderConfessions();
+            showToast('Reply added!');
+        };
+
+        function renderConfessions() {
+            const filtered = currentFilter === 'All'
+                ? confessions
+                : confessions.filter(c => c.category === currentFilter);
+
+            postCount.textContent = `${filtered.length} ${filtered.length === 1 ? 'Post' : 'Posts'}`;
+
+            if (filtered.length === 0) {
+                confessionsList.innerHTML = `
+                    <div class="empty-feed-card">
+                        No confessions in this category yet. Be the first to share!
+                    </div>
+                `;
+                return;
+            }
+
+            confessionsList.innerHTML = filtered.map(post => {
+                const initials = post.codename.slice(0, 2).toUpperCase();
+                const commentsHTML = post.comments.length > 0
+                    ? post.comments.map(c => `
+                        <div class="comment-bubble">
+                            <div class="comment-top">
+                                <span class="comment-author"><span class="comment-author-dot"></span>${escapeHTML(c.author)}</span>
+                                <span class="comment-time">${escapeHTML(c.time)}</span>
+                            </div>
+                            <div class="comment-body">${escapeHTML(c.text)}</div>
+                        </div>
+                    `).join('')
+                    : `<div class="no-comments-hint">No replies yet. Start the conversation below.</div>`;
+
+                return `
+                    <article class="confession-item">
+                        <div class="confession-header">
+                            <div class="sender-info">
+                                <div class="avatar-badge">${escapeHTML(initials)}</div>
+                                <div class="sender-meta">
+                                    <span class="sender-name">${escapeHTML(post.codename)}</span>
+                                    <span class="confession-time">${escapeHTML(post.timestamp)}</span>
+                                </div>
+                            </div>
+                            <span class="tag">${escapeHTML(post.category)}</span>
+                        </div>
+
+                        <div class="confession-text">${escapeHTML(post.message)}</div>
+
+                        <div class="action-bar">
+                            <button type="button" class="action-btn ${post.liked ? 'liked' : ''}" onclick="toggleLike(${post.id})">
+                                ${post.liked ? '💚' : '🤍'} <span>${post.likes}</span>
+                            </button>
+                            <button type="button" class="action-btn ${post.openComments ? 'active-comments' : ''}" onclick="toggleComments(${post.id})">
+                                💬 <span>${post.comments.length} ${post.comments.length === 1 ? 'Reply' : 'Replies'}</span>
+                            </button>
+                        </div>
+
+                        <div class="comments-section ${post.openComments ? '' : 'collapsed'}">
+                            <div class="comments-list">${commentsHTML}</div>
+                            <form class="comment-form" onsubmit="addComment(event, ${post.id})">
+                                <input type="text" class="comment-name-input" placeholder="Alias (Opt.)" maxlength="20">
+                                <input type="text" class="comment-text-input" placeholder="Write a reply..." maxlength="250" required>
+                                <button type="submit" class="comment-submit-btn">Send</button>
+                            </form>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        renderConfessions();
+    </script>
+</body>
+</html>
